@@ -1,0 +1,17 @@
+image: nixos/nix:latest
+
+variables:
+  NIX_CONFIG: "experimental-features = nix-command flakes\nsandbox = false"
+
+before_script:
+  - nix shell nixpkgs#git --command git status --short
+
+lint:
+  stage: test
+  script:
+    - nix shell nixpkgs#git nixpkgs#nixfmt nixpkgs#deadnix --command sh -c 'nixfmt --check $(git ls-files "*.nix") && deadnix .'
+
+evaluate:
+  stage: test
+  script:
+    - nix flake check --no-build
