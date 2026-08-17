@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     # Browsers / communication
     google-chrome
@@ -124,6 +124,7 @@
     go
     comma
     bubblewrap
+    gh
 
     # Just cool
     peaclock
