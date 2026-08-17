@@ -80,7 +80,9 @@ jobs:
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
         run: |
-          cachix authtoken "$CACHIX_AUTH_TOKEN"
+          TOKEN="$(printf '%s' "$CACHIX_AUTH_TOKEN" | tr -d '\r\n')"
+          cachix authtoken "$TOKEN"
+          unset TOKEN
           cachix use "$CACHIX_CACHE"
 
       - name: Build and cache fury
@@ -124,7 +126,9 @@ jobs:
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
         run: |
-          cachix authtoken "$CACHIX_AUTH_TOKEN"
+          TOKEN="$(printf '%s' "$CACHIX_AUTH_TOKEN" | tr -d '\r\n')"
+          cachix authtoken "$TOKEN"
+          unset TOKEN
           cachix use "$CACHIX_CACHE"
 
       - name: Build and cache kinetix
