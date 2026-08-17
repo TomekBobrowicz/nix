@@ -15,8 +15,18 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: nixos-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   CACHIX_CACHE: tomekbobrowicz-nix
+  NIX_CONFIG: |
+    access-tokens = github.com=${{ github.token }}
+    experimental-features = nix-command flakes
+    accept-flake-config = true
+    builders-use-substitutes = true
+    max-jobs = auto
 
 jobs:
   flake-check:
@@ -32,28 +42,27 @@ jobs:
         with:
           github_access_token: ${{ github.token }}
 
-      - name: Configure Nix
-        run: |
-          mkdir -p "$HOME/.config/nix"
-
-          cat > "$HOME/.config/nix/nix.conf" <<EOF
-          access-tokens = github.com=${{ github.token }}
-          EOF
-
-      - name: Flake check
+      - name: Check flake
         run: |
           nix flake check \
             --all-systems \
             --print-build-logs
 
-  build-fury:
-    name: Build fury
+  build:
+    name: Build ${{ matrix.host }}
     runs-on: ubuntu-latest
     needs: flake-check
 
     if: >
       github.event_name == 'schedule' ||
       github.event_name == 'workflow_dispatch'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        host:
+          - fury
+          - kinetix
 
     steps:
       - name: Checkout
@@ -64,15 +73,7 @@ jobs:
         with:
           github_access_token: ${{ github.token }}
 
-      - name: Configure Nix
-        run: |
-          mkdir -p "$HOME/.config/nix"
-
-          cat > "$HOME/.config/nix/nix.conf" <<EOF
-          access-tokens = github.com=${{ github.token }}
-          EOF
-
-      - name: Install Cachix CLI
+      - name: Install Cachix
         run: |
           nix profile install nixpkgs#cachix
 
@@ -83,53 +84,9 @@ jobs:
           cachix authtoken "$CACHIX_AUTH_TOKEN"
           cachix use "$CACHIX_CACHE"
 
-      - name: Build and cache fury
+      - name: Build ${{ matrix.host }}
         run: |
           cachix watch-exec "$CACHIX_CACHE" -- \
             nix build \
               --print-build-logs \
-              .#nixosConfigurations.fury.config.system.build.toplevel
-
-  build-kinetix:
-    name: Build kinetix
-    runs-on: ubuntu-latest
-    needs: flake-check
-
-    if: >
-      github.event_name == 'schedule' ||
-      github.event_name == 'workflow_dispatch'
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.2.2
-
-      - name: Install Nix
-        uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31.10.6
-        with:
-          github_access_token: ${{ github.token }}
-
-      - name: Configure Nix
-        run: |
-          mkdir -p "$HOME/.config/nix"
-
-          cat > "$HOME/.config/nix/nix.conf" <<EOF
-          access-tokens = github.com=${{ github.token }}
-          EOF
-
-      - name: Install Cachix CLI
-        run: |
-          nix profile install nixpkgs#cachix
-
-      - name: Configure Cachix
-        env:
-          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
-        run: |
-          cachix authtoken "$CACHIX_AUTH_TOKEN"
-          cachix use "$CACHIX_CACHE"
-
-      - name: Build and cache kinetix
-        run: |
-          cachix watch-exec "$CACHIX_CACHE" -- \
-            nix build \
-              --print-build-logs \
-              .#nixosConfigurations.kinetix.config.system.build.toplevel
+              ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel"
