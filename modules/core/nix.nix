@@ -1,5 +1,4 @@
-{ inputs, ... }:
-{
+{inputs, ...}: {
   nix = {
     settings = {
       experimental-features = [
@@ -11,7 +10,14 @@
         "root"
         "@wheel"
       ];
-      substituters = [ "https://cache.nixos.org/" ];
+      substituters = ["https://cache.nixos.org/"];
+      extra-substituters = [
+        "https://tomekbobrowicz-nix.cachix.org"
+      ];
+      extra-trusted-public-keys = [
+        "tomekbobrowicz-nix.cachix.org-1:Lu5pkgP6+yf6ShXEzKXzIwYVuLTNoI139g3aQT5rf6M=
+"
+      ];
     };
 
     gc = {
