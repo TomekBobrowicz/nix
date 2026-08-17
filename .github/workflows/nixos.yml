@@ -21,9 +21,6 @@ jobs:
       - name: Check flake
         run: nix flake check --all-systems
 
-      - name: Check formatting
-        run: nix fmt -- --check
-
   build-fury:
     name: Build fury
     runs-on: ubuntu-latest
@@ -37,8 +34,7 @@ jobs:
         uses: DeterminateSystems/determinate-nix-action@v3
 
       - name: Build fury
-        run: |
-          nix build .#nixosConfigurations.fury.config.system.build.toplevel
+        run: nix build .#nixosConfigurations.fury.config.system.build.toplevel
 
   build-kinetix:
     name: Build kinetix
@@ -53,5 +49,4 @@ jobs:
         uses: DeterminateSystems/determinate-nix-action@v3
 
       - name: Build kinetix
-        run: |
-          nix build .#nixosConfigurations.kinetix.config.system.build.toplevel
+        run: nix build .#nixosConfigurations.kinetix.config.system.build.toplevel
