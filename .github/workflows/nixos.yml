@@ -39,6 +39,9 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Check flake
+        env:
+          NIX_CONFIG: |
+            access-tokens = github.com=${{ github.token }}
         run: |
           nix flake check \
             --all-systems \
@@ -48,6 +51,7 @@ jobs:
     name: Build fury
     runs-on: ubuntu-latest
     needs: flake-check
+
     if: >
       github.event_name == 'schedule' ||
       github.event_name == 'workflow_dispatch'
@@ -68,6 +72,9 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Build fury
+        env:
+          NIX_CONFIG: |
+            access-tokens = github.com=${{ github.token }}
         run: |
           nix build \
             --print-build-logs \
@@ -77,6 +84,7 @@ jobs:
     name: Build kinetix
     runs-on: ubuntu-latest
     needs: flake-check
+
     if: >
       github.event_name == 'schedule' ||
       github.event_name == 'workflow_dispatch'
@@ -97,6 +105,9 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Build kinetix
+        env:
+          NIX_CONFIG: |
+            access-tokens = github.com=${{ github.token }}
         run: |
           nix build \
             --print-build-logs \
