@@ -7,7 +7,6 @@ on:
 
   pull_request:
 
-  # Full NixOS builds every 3 days
   schedule:
     - cron: "0 3 */3 * *"
 
@@ -24,18 +23,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Install Nix
         uses: DeterminateSystems/determinate-nix-action@v3
+        with:
+          extra-conf: |
+            access-tokens = github.com=${{ github.token }}
 
       - name: Setup Cachix
         uses: cachix/cachix-action@v17
         with:
           name: tomekbobrowicz-nix
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Check flake
-        run: nix flake check --all-systems
+        run: |
+          nix flake check --all-systems --print-build-logs
 
   build-fury:
     name: Build fury
@@ -48,15 +53,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Install Nix
         uses: DeterminateSystems/determinate-nix-action@v3
+        with:
+          extra-conf: |
+            access-tokens = github.com=${{ github.token }}
 
       - name: Setup Cachix
         uses: cachix/cachix-action@v17
         with:
           name: tomekbobrowicz-nix
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Build fury
         run: |
@@ -75,15 +85,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Install Nix
         uses: DeterminateSystems/determinate-nix-action@v3
+        with:
+          extra-conf: |
+            access-tokens = github.com=${{ github.token }}
 
       - name: Setup Cachix
         uses: cachix/cachix-action@v17
         with:
           name: tomekbobrowicz-nix
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Build kinetix
         run: |
