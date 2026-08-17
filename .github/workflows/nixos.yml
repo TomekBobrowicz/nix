@@ -15,6 +15,9 @@ on:
 permissions:
   contents: read
 
+env:
+  CACHIX_CACHE: tomekbobrowicz-nix
+
 jobs:
   flake-check:
     name: Flake Check
@@ -32,6 +35,7 @@ jobs:
       - name: Configure Nix
         run: |
           mkdir -p "$HOME/.config/nix"
+
           cat > "$HOME/.config/nix/nix.conf" <<EOF
           access-tokens = github.com=${{ github.token }}
           EOF
@@ -63,15 +67,28 @@ jobs:
       - name: Configure Nix
         run: |
           mkdir -p "$HOME/.config/nix"
+
           cat > "$HOME/.config/nix/nix.conf" <<EOF
           access-tokens = github.com=${{ github.token }}
           EOF
 
-      - name: Build fury
+      - name: Install Cachix CLI
         run: |
-          nix build \
-            --print-build-logs \
-            .#nixosConfigurations.fury.config.system.build.toplevel
+          nix profile install nixpkgs#cachix
+
+      - name: Configure Cachix
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        run: |
+          cachix authtoken "$CACHIX_AUTH_TOKEN"
+          cachix use "$CACHIX_CACHE"
+
+      - name: Build and cache fury
+        run: |
+          cachix watch-exec "$CACHIX_CACHE" -- \
+            nix build \
+              --print-build-logs \
+              .#nixosConfigurations.fury.config.system.build.toplevel
 
   build-kinetix:
     name: Build kinetix
@@ -94,12 +111,25 @@ jobs:
       - name: Configure Nix
         run: |
           mkdir -p "$HOME/.config/nix"
+
           cat > "$HOME/.config/nix/nix.conf" <<EOF
           access-tokens = github.com=${{ github.token }}
           EOF
 
-      - name: Build kinetix
+      - name: Install Cachix CLI
         run: |
-          nix build \
-            --print-build-logs \
-            .#nixosConfigurations.kinetix.config.system.build.toplevel
+          nix profile install nixpkgs#cachix
+
+      - name: Configure Cachix
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        run: |
+          cachix authtoken "$CACHIX_AUTH_TOKEN"
+          cachix use "$CACHIX_CACHE"
+
+      - name: Build and cache kinetix
+        run: |
+          cachix watch-exec "$CACHIX_CACHE" -- \
+            nix build \
+              --print-build-logs \
+              .#nixosConfigurations.kinetix.config.system.build.toplevel
