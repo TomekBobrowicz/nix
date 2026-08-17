@@ -5,6 +5,10 @@ on:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   flake-check:
@@ -18,6 +22,9 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/determinate-nix-action@v3
 
+      - name: Setup Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
       - name: Check flake
         run: nix flake check --all-systems
 
@@ -25,6 +32,7 @@ jobs:
     name: Build fury
     runs-on: ubuntu-latest
     needs: flake-check
+    if: github.event_name == 'workflow_dispatch'
 
     steps:
       - name: Checkout
@@ -33,13 +41,20 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/determinate-nix-action@v3
 
+      - name: Setup Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
       - name: Build fury
-        run: nix build .#nixosConfigurations.fury.config.system.build.toplevel
+        run: |
+          nix build \
+            --print-build-logs \
+            .#nixosConfigurations.fury.config.system.build.toplevel
 
   build-kinetix:
     name: Build kinetix
     runs-on: ubuntu-latest
     needs: flake-check
+    if: github.event_name == 'workflow_dispatch'
 
     steps:
       - name: Checkout
@@ -48,5 +63,11 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/determinate-nix-action@v3
 
+      - name: Setup Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
       - name: Build kinetix
-        run: nix build .#nixosConfigurations.kinetix.config.system.build.toplevel
+        run: |
+          nix build \
+            --print-build-logs \
+            .#nixosConfigurations.kinetix.config.system.build.toplevel
