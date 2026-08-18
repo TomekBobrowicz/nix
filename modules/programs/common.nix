@@ -125,6 +125,7 @@
     comma
     bubblewrap
     gh
+    cosign
 
     # Just cool
     peaclock
