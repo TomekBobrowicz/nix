@@ -1,6 +1,6 @@
 { ... }:
 {
-  networking.hostName = "kinetix";
+  networking.hostName = "callisto";
 
   hardware.bluetooth.enable = true;
 

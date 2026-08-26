@@ -119,11 +119,11 @@
     formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
 
     nixosConfigurations = {
-      kinetix = mkHost {
-        hostname = "kinetix";
+      callisto = mkHost {
+        hostname = "callisto";
         hardwareProfile = nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1;
-        hardwareConfiguration = ./hosts/kinetix/hardware-configuration.nix;
-        hostModule = ./hosts/kinetix/default.nix;
+        hardwareConfiguration = ./hosts/callisto/hardware-configuration.nix;
+        hostModule = ./hosts/callisto/default.nix;
       };
 
       fury = mkHost {
