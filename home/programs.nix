@@ -1,8 +1,41 @@
-{ ... }: {
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    bat
+    eza
+    fd
+    fzf
+    ripgrep
+    tree
+    wget
+    curl
+    jq
+    unzip
+    zip
+
+    zoxide
+
+    git
+    neovim
+  ];
+
   programs.bash = {
     enable = true;
-
     enableCompletion = true;
+
+    historySize = 50000;
+    historyFileSize = 100000;
+
+    historyControl = [
+      "ignoredups"
+      "erasedups"
+    ];
+
+    shellOptions = [
+      "histappend"
+      "checkwinsize"
+      "cdspell"
+      "dirspell"
+    ];
 
     shellAliases = {
       ls = "eza";
@@ -24,48 +57,27 @@
     };
 
     initExtra = ''
-      # zoxide
       eval "$(zoxide init bash)"
-      # fzf
       eval "$(fzf --bash)"
+
+      export HISTTIMEFORMAT="%F %T "
 
       shopt -s autocd
       shopt -s cdspell
       shopt -s dirspell
 
-      # Ctrl+R → fuzzy history
-      bind '"\C-r": reverse-search-history'
-
-      # Up/down search through history based on typed prefix
       bind '"\e[A": history-search-backward'
       bind '"\e[B": history-search-forward'
     '';
   };
-  programs.starship = {
-    enable = true;
-    enableBashIntegration = true;
-  };
 
-  programs.fzf.enable = true;
   programs.zoxide.enable = true;
-
-  programs.eza = {
-    enable = true;
-    git = true;
-    icons = "auto";
-  };
-
+  programs.fzf.enable = true;
+  programs.eza.enable = true;
   programs.bat.enable = true;
 
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-  };
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-    NIXOS_OZONE_WL = "1";
-    MOZ_ENABLE_WAYLAND = "1";
   };
 }
