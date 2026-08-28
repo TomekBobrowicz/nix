@@ -73,6 +73,7 @@
 
   programs.zoxide.enable = true;
   programs.fzf.enable = true;
+  programs.fzf.enableNushellIntegration = false;
   programs.eza.enable = true;
   programs.bat.enable = true;
 

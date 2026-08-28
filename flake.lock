@@ -6,17 +6,17 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1787560935,
-        "narHash": "sha256-U/FDxDa6POaVoTaXFR7zBR1dt1RZUtsWab6Qn4lF3Rk=",
-        "ref": "refs/heads/main",
-        "rev": "0458e45cee3389f84de9dcb32586d1188513436e",
-        "revCount": 2051,
-        "type": "git",
-        "url": "https://github.com/ilysenko/codex-desktop-linux"
+        "lastModified": 1787889036,
+        "narHash": "sha256-N+cQHWiCJvb/M4e+ITRUD3+EjnsGEIREoeW38lmgeWM=",
+        "owner": "ilysenko",
+        "repo": "codex-desktop-linux",
+        "rev": "bd610e96e87bda672f384c79ce5bb87ea0d5a6ee",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://github.com/ilysenko/codex-desktop-linux"
+        "owner": "ilysenko",
+        "repo": "codex-desktop-linux",
+        "type": "github"
       }
     },
     "flake-utils": {
@@ -62,17 +62,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1787661347,
-        "narHash": "sha256-THmnBAdAIV+jT348f3r/vyoeb6ilhcVLwVXkBU7Pai8=",
-        "ref": "refs/heads/master",
-        "rev": "52c3a5881c821ad7367bbde075e52b76cdb378ab",
-        "revCount": 7185,
-        "type": "git",
-        "url": "https://github.com/nix-community/home-manager"
+        "lastModified": 1787797243,
+        "narHash": "sha256-8+Q7NOB7RPajRjA4pbCDLzqH+MTjnG9x6LUPLfL2joA=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "99c9ec63390f1d8c14d95d9e8b17cc29cfbd4e11",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://github.com/nix-community/home-manager"
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
       }
     },
     "kineticwe": {
@@ -106,15 +106,15 @@
       "locked": {
         "lastModified": 1787144466,
         "narHash": "sha256-HHfv2/HkNSKbbSyU9iD/g8lbP6r4tl33sSw1W4rXCk0=",
-        "ref": "refs/heads/master",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
         "rev": "0471accf8d0a8210b31d947497d179ecc99e0021",
-        "revCount": 2841,
-        "type": "git",
-        "url": "https://github.com/NixOS/nixos-hardware"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://github.com/NixOS/nixos-hardware"
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
       }
     },
     "nixpkgs": {
@@ -129,6 +129,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1787848966,
+        "narHash": "sha256-7gDpu5hpq0rOYnYMcOWqSzquK4HA/xU8Xf3CjUBOOJA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d57af924f160a5084293c71c2043f058bd1cdb60",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-26.05",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -177,17 +193,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1787661534,
-        "narHash": "sha256-KMKnvnrst1sEr9GA88HCSR7ffSohZb7ubH+fUatiUBI=",
-        "ref": "refs/heads/main",
-        "rev": "67addbd529cfd9db30c9d0ee6e08d5f6836c9e1a",
-        "revCount": 5326,
-        "type": "git",
-        "url": "https://github.com/noctalia-dev/noctalia"
+        "lastModified": 1787918586,
+        "narHash": "sha256-8tG/6g8W2hBg8Gtqd1j1sPr7IjXTHIDCZqeaod6f3aA=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia",
+        "rev": "e5941571aab9b0cdd75d29855e93164ab995ca46",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://github.com/noctalia-dev/noctalia"
+        "owner": "noctalia-dev",
+        "repo": "noctalia",
+        "type": "github"
       }
     },
     "root": {
@@ -197,6 +213,7 @@
         "kineticwe": "kineticwe",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-stable": "nixpkgs-stable",
         "noctalia": "noctalia_2",
         "sops-nix": "sops-nix"
       }
@@ -210,15 +227,15 @@
       "locked": {
         "lastModified": 1786629091,
         "narHash": "sha256-gkig4nPi1CWc4Z50GBsjE4ygSE7hMpl/TwID2an2Cck=",
-        "ref": "refs/heads/master",
+        "owner": "Mic92",
+        "repo": "sops-nix",
         "rev": "a8627b21b9107c5711c96b84f32a9a4b3d45295f",
-        "revCount": 1236,
-        "type": "git",
-        "url": "https://github.com/Mic92/sops-nix"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://github.com/Mic92/sops-nix"
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "systems": {
