@@ -1,5 +1,4 @@
-{...}:
-{
+{...}: {
   networking.hostName = "t460";
 
   # Lightweight laptop power management.
@@ -11,4 +10,4 @@
   # Bluetooth only if you actually need it.
   hardware.bluetooth.enable = true;
 }
-hosts/fury/hardware-configuration.nix
+

@@ -228,6 +228,7 @@
           ./hosts/t460/default.nix;
 
         desktopModules = [
+	  ./modules/desktop/kde.nix
           ./modules/desktop/audio.nix
           ./modules/desktop/fonts.nix
           ./modules/desktop/flatpak.nix
@@ -236,6 +237,7 @@
         ];
 
         homeModules = [
+	  ./home/kde.nix
           ./home/niri.nix
           ./home/multimedia.nix
           ./home/noctalia.nix
