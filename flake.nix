@@ -235,6 +235,9 @@
 
         homeModules = [
           ./home/hyprland.nix
+          ./home/waybar.nix
+          ./home/hyprlock.nix
+          ./home/wofi.nix
           ./home/tui.nix
         ];
 
