@@ -211,7 +211,7 @@
       # ============================================================
       # T460
       # Lightweight stable NixOS
-      # Hyprland / Wayland / TUI oriented
+      # Niri / Wayland / TUI oriented
       # ============================================================
 
       t460 = mkHost {
@@ -228,17 +228,16 @@
           ./hosts/t460/default.nix;
 
         desktopModules = [
-          ./modules/desktop/hyprland.nix
           ./modules/desktop/audio.nix
           ./modules/desktop/fonts.nix
+          ./modules/desktop/flatpak.nix
+          ./modules/desktop/noctalia.nix
         ];
 
         homeModules = [
-          ./home/hyprland.nix
-          ./home/waybar.nix
-          ./home/hyprlock.nix
-          ./home/wofi.nix
-          ./home/tui.nix
+          ./home/niri.nix
+          ./home/multimedia.nix
+          ./home/noctalia.nix
         ];
 
         virtualization = false;
