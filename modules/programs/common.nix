@@ -92,6 +92,7 @@
     nvme-cli
     virt-viewer
     podman-compose
+    mediawriter
 
     # CLI / utilities
     curl
