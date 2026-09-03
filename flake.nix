@@ -237,14 +237,12 @@
           ./modules/desktop/fonts.nix
           ./modules/desktop/flatpak.nix
           ./modules/desktop/noctalia.nix
-          #./modules/desktop/niri.nix
-          ./modules/desktop/mango.nix
+          ./modules/desktop/niri.nix
         ];
 
         homeModules = [
           ./home/kde.nix
-          #./home/niri.nix
-          ./home/mango.nix
+          ./home/niri.nix
           ./home/multimedia.nix
           ./home/noctalia.nix
         ];

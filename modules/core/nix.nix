@@ -16,11 +16,8 @@
         "https://noctalia.cachix.org"
       ];
       extra-trusted-public-keys = [
-        "tomekbobrowicz-nix.cachix.org-1:Lu5pkgP6+yf6ShXEzKXzIwYVuLTNoI139g3aQT5rf6M=
-          "
-        noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=
-        "
-"
+        "tomekbobrowicz-nix.cachix.org-1:Lu5pkgP6+yf6ShXEzKXzIwYVuLTNoI139g3aQT5rf6M="
+        "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       ];
     };
 
