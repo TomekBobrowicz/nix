@@ -234,7 +234,6 @@
 
         homeModules = [
           ./home/kde.nix
-          ./home/niri.nix
           ./home/multimedia.nix
           ./home/noctalia.nix
           kineticwe.homeModules.default
