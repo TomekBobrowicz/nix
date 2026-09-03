@@ -1,8 +1,12 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.mangowm.nixosModules.mango
+  ];
   wayland.windowManager.mango = {
     enable = true;
 
