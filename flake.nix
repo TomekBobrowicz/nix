@@ -19,12 +19,12 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:noctalia-dev/noctalia/cachix";
     };
 
     kineticwe = {
-      noctalia.url = "github:noctalia-dev/noctalia/cachix";
+      url = "gitlab:theblackdon/kineticwe";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix = {
