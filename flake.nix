@@ -201,6 +201,7 @@
           ./home/kde.nix
           ./home/multimedia.nix
           ./home/noctalia.nix
+          .
           kineticwe.homeModules.default
         ];
 
@@ -228,23 +229,15 @@
           ./modules/desktop/fonts.nix
           ./modules/desktop/flatpak.nix
           ./modules/desktop/noctalia.nix
-<<<<<<< HEAD
           ./modules/desktop/kineticwe.nix
-
-=======
-          ./modules/desktop/niri.nix
->>>>>>> a4e46c1cf5f9edf149cba40af9c42a307b9454cb
         ];
 
         homeModules = [
           ./home/kde.nix
-<<<<<<< HEAD
-=======
           ./home/niri.nix
->>>>>>> a4e46c1cf5f9edf149cba40af9c42a307b9454cb
           ./home/multimedia.nix
           ./home/noctalia.nix
-	  kineticwe.homeModules.default
+          kineticwe.homeModules.default
         ];
 
         virtualization = false;
