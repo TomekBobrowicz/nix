@@ -1,7 +1,7 @@
 keys:
   - &fury age1d6pvu8y7gpykjd49z332tpvhxct69ggusphje7dwzfknu5mmqc6qcpuuf5
   - &callisto age1fwpzypyk7r3zk79kkch3xwx9lmaj7jzxx3lashchcpcu3yrcfd9qlwd8q0
-  - &t460 age1rtpwtysjwnt2mfvcegxrcwvd34f5htgm0y6gaeurxkqr8se3dv7q20924h
+  - &t460 age1mx8p8p4hv2tez27h05nlu0s23h2ggjyw848sq5ch6qt228dhfgwsd32ezl
 creation_rules:
   - path_regex: secrets/.*\.yaml$
     key_groups:

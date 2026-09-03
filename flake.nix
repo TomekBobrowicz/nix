@@ -35,10 +35,6 @@
     codex-desktop = {
       url = "github:ilysenko/codex-desktop-linux";
     };
-    mango = {
-      url = "github:mangowm/mango";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ {
@@ -51,7 +47,6 @@
     kineticwe,
     sops-nix,
     codex-desktop,
-    mango,
     ...
   }: let
     system = "x86_64-linux";
@@ -214,16 +209,12 @@
 
       # ============================================================
       # T460
-      # Lightweight stable NixOS
-      # Niri / Wayland / TUI oriented
+      # backup machine
+      # Full KDE / Noctalia / KineticWE
       # ============================================================
 
       t460 = mkHost {
         hostname = "t460";
-
-        # IMPORTANT:
-        # T460 uses stable nixpkgs.
-        pkgsSource = nixpkgs-stable;
 
         hardwareConfiguration =
           ./hosts/t460/hardware-configuration.nix;
@@ -237,14 +228,23 @@
           ./modules/desktop/fonts.nix
           ./modules/desktop/flatpak.nix
           ./modules/desktop/noctalia.nix
+<<<<<<< HEAD
+          ./modules/desktop/kineticwe.nix
+
+=======
           ./modules/desktop/niri.nix
+>>>>>>> a4e46c1cf5f9edf149cba40af9c42a307b9454cb
         ];
 
         homeModules = [
           ./home/kde.nix
+<<<<<<< HEAD
+=======
           ./home/niri.nix
+>>>>>>> a4e46c1cf5f9edf149cba40af9c42a307b9454cb
           ./home/multimedia.nix
           ./home/noctalia.nix
+	  kineticwe.homeModules.default
         ];
 
         virtualization = false;
