@@ -36,6 +36,10 @@
     codex-desktop = {
       url = "github:ilysenko/codex-desktop-linux";
     };
+    mango = {
+      url = "github:mangowm/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -48,6 +52,7 @@
     kineticwe,
     sops-nix,
     codex-desktop,
+    mango,
     ...
   }: let
     system = "x86_64-linux";
@@ -228,17 +233,19 @@
           ./hosts/t460/default.nix;
 
         desktopModules = [
-	  ./modules/desktop/kde.nix
+          ./modules/desktop/kde.nix
           ./modules/desktop/audio.nix
           ./modules/desktop/fonts.nix
           ./modules/desktop/flatpak.nix
           ./modules/desktop/noctalia.nix
-	  ./modules/desktop/niri.nix
+          #./modules/desktop/niri.nix
+          ./modules/desktop/mango.nix
         ];
 
         homeModules = [
-	  ./home/kde.nix
-          ./home/niri.nix
+          ./home/kde.nix
+          #./home/niri.nix
+          ./home/mango.nix
           ./home/multimedia.nix
           ./home/noctalia.nix
         ];
