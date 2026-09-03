@@ -201,7 +201,6 @@
           ./home/kde.nix
           ./home/multimedia.nix
           ./home/noctalia.nix
-          .
           kineticwe.homeModules.default
         ];
 
