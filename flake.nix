@@ -40,7 +40,6 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs = inputs @ {
@@ -168,11 +167,7 @@
         ];
 
         homeModules = [
-          ./home/kde.nixdms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
+          ./home/kde.nix
           ./home/multimedia.nix
           ./home/noctalia.nix
           kineticwe.homeModules.default
@@ -226,6 +221,7 @@
 
       t460 = mkHost {
         hostname = "t460";
+        pkgsSource = nixpkgs-stable;
 
         hardwareConfiguration =
           ./hosts/t460/hardware-configuration.nix;
@@ -244,7 +240,6 @@
           ./home/kde.nix
           ./home/multimedia.nix
           ./home/niri.nix
-          
         ];
 
         virtualization = false;
