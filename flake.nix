@@ -35,15 +35,6 @@
     codex-desktop = {
       url = "github:ilysenko/codex-desktop-linux";
     };
-
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ {
@@ -56,7 +47,6 @@
     kineticwe,
     sops-nix,
     codex-desktop,
-    dms,
     ...
   }: let
     system = "x86_64-linux";
@@ -220,7 +210,7 @@
       # ============================================================
       # T460
       # backup machine
-      # Niri + DMS
+      # kde + multimedia
       # ============================================================
 
       t460 = mkHost {
@@ -243,7 +233,6 @@
         homeModules = [
           ./home/kde.nix
           ./home/multimedia.nix
-          ./home/niri.nix
         ];
 
         virtualization = false;
