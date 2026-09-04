@@ -35,6 +35,12 @@
     codex-desktop = {
       url = "github:ilysenko/codex-desktop-linux";
     };
+
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = inputs @ {
@@ -47,6 +53,7 @@
     kineticwe,
     sops-nix,
     codex-desktop,
+    dms,
     ...
   }: let
     system = "x86_64-linux";
@@ -161,7 +168,11 @@
         ];
 
         homeModules = [
-          ./home/kde.nix
+          ./home/kde.nixdms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
           ./home/multimedia.nix
           ./home/noctalia.nix
           kineticwe.homeModules.default
@@ -210,7 +221,7 @@
       # ============================================================
       # T460
       # backup machine
-      # Full KDE / Noctalia / KineticWE
+      # Niri + DMS
       # ============================================================
 
       t460 = mkHost {
@@ -227,15 +238,13 @@
           ./modules/desktop/audio.nix
           ./modules/desktop/fonts.nix
           ./modules/desktop/flatpak.nix
-          ./modules/desktop/noctalia.nix
-          ./modules/desktop/kineticwe.nix
         ];
 
         homeModules = [
           ./home/kde.nix
           ./home/multimedia.nix
-          ./home/noctalia.nix
-          kineticwe.homeModules.default
+          ./home/niri.nix
+          
         ];
 
         virtualization = false;
